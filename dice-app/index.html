@@ -1,21 +1,132 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+    <meta charset="UTF-8">
+    <meta name="author" content="Yolia Simon"> <!--author of the website-->
     <title>Yolia's Dice App</title>
+
+    <style>
+      @font-face {
+        font-family: Persona5Menu;
+        src: url(appfonts/Persona5MenuFont.ttf);
+      }
+
+      @font-face {
+        font-family: Persona5;
+        src: url(appfonts/Persona5regfont.ttf);
+      }
+
+      html {
+        background-image: url(images/background.jpg);
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat;
+        font-family: Persona5;
+        color:rgb(255, 255, 255);
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh; /* Full viewport height */
+        cursor: url(images/cursor.png), auto;
+
+      }
+
+      body{
+        margin-top: 3%;
+        overflow-y: hidden;
+        background-size: cover;
+        scroll-behavior: smooth;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      #heading {
+        font-family: Persona5Menu;
+      }
+
+      #textbox{
+        border: #D4A3C4 7px double;
+        /* border-image: url(images/) 30 round;  fix this later*/
+        display: inline-block;
+        padding: 10px;
+      }
+
+      .button-container{
+        display: flex;
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center horizontally */
+        /* margin-top: 100px; */
+        height: 100vh; /* Full viewport height */
+      }
+
+      button{
+        font-size: 20px;
+        font-family: Persona5Menu;
+        margin: 10px; /* Space between buttons */
+        padding: 10px 10px;
+        background-color: #D4A3C4;
+        color: rgb(0, 0, 0);
+        border: 2px solid black;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .dice-container {
+            font-size: 100px;
+            margin: -20px 0;
+        }
+
+      .footer{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: #D4A3C4;
+      }
+
+      .history-item span {
+            font-size: 30px;
+            overflow-y: scroll;
+        }
+
+    </style>
+
+
   </head>
+
+
+
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <div><h1 id="heading">◦◉✿ Welcome to the Dice Roller! ✿◉◦</h1>
+      <div id="textbox">Choose a dice from d4, d6 and d20 and may the odds ever be in your favour! </div>
+    </div>
+
+    <br><br><br>
+
+    <!-- app-wrapper -->
+    <div class="button-container">
+      <button type="button" class="roll-d4">
+        ╔════▣◎▣════╗ <br> Roll D4 <br> ╚════▣◎▣════╝
+      </button>
+
+    <button type="button" class="roll-d6">
+      ╔════▣◎▣════╗ <br> Roll D6 <br> ╚════▣◎▣════╝
+    </button>
+
+    <button type="button" class="roll-20">
+      ╔════▣◎▣════╗ <br> Roll D20 <br> ╚════▣◎▣════╝
+    </button>
+
+    <div class="dice-container">&#9860;</div>
+    <p class="history-list"> </p>
+
+    </div>
+
+    <div class="footer">
+      <p id="info"></p>
+    </div>
+
+
   </body>
   <script src="./renderer.js"></script>
 </html>
