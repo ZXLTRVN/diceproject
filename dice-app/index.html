@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="author" content="Yolia Simon"> <!--author of the website-->
     <title>Yolia's Dice App</title>
+    <script src=
+"https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
 
     <style>
       @font-face {
@@ -20,6 +23,7 @@
         background-image: url(images/background.jpg);
         background-position: center; /* Centers the image */
         background-repeat: no-repeat;
+        background-attachment: fixed;
         font-family: Persona5;
         color:rgb(255, 255, 255);
         text-align: center;
@@ -27,35 +31,49 @@
         padding: 0;
         min-height: 100vh; /* Full viewport height */
         cursor: url(images/cursor.png), auto;
+        scrollbar-width: thin; /* Adjust scrollbar appearance */
+        scrollbar-color: #a3d4b0 transparent;
 
       }
 
       body{
         margin-top: 3%;
-        overflow-y: hidden;
+        overflow: hidden;
         background-size: cover;
         scroll-behavior: smooth;
         flex-direction: column;
         text-align: center;
+
       }
 
       #heading {
         font-family: Persona5Menu;
       }
 
-      #textbox{
+      #textbox {
         border: #D4A3C4 7px double;
-        /* border-image: url(images/) 30 round;  fix this later*/
         display: inline-block;
         padding: 10px;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.524);
+      }
+
+      #intro {
+        padding-top: 1px;
+
       }
 
       .button-container{
-        display: flex;
+        display:flex;
         flex-direction: column; /* Stack buttons vertically */
         align-items: center; /* Center horizontally */
-        /* margin-top: 100px; */
-        height: 100vh; /* Full viewport height */
+        height: 462px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        border: 5px groove #D4A3C4;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.37);
+
       }
 
       button{
@@ -65,15 +83,25 @@
         padding: 10px 10px;
         background-color: #D4A3C4;
         color: rgb(0, 0, 0);
-        border: 2px solid black;
+        border: 2px solid rgb(150, 28, 28);
         cursor: pointer;
         text-align: center;
+        border-radius: 10px;
       }
 
-      .dice-container {
-            font-size: 100px;
-            margin: -20px 0;
+      .dice-display {
+          width: 120px;
+          height: 100px;
+          border: 5px groove #D4A3C4;
+          border-radius: 10px;
+          padding: 10px 10px;
+          background-color: rgba(0, 0, 0, 0.25);
         }
+      .dice-display img {
+        max-width: 130px; /* Adjust image size */
+        max-height: 120px;
+        object-fit: contain; /* Ensures image scales properly */
+      }
 
       .footer{
         position: fixed;
@@ -81,52 +109,113 @@
         bottom: 0;
         width: 100%;
         text-align: center;
-        background-color: #D4A3C4;
+        background-color: #d4a3c487;
       }
 
       .history-item span {
-            font-size: 30px;
+            font-size: 25px;
             overflow-y: scroll;
         }
+
+      .app-container {
+        display: flex;
+        justify-content: space-between; /* Pushes items to both sides */
+        align-items: flex-start;
+        width: 90%;
+        margin: auto;
+        height: 80vh;
+        padding-top: 30px;
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+
+        /* Left side: Button container */
+      .left-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 10px solid transparent;
+        border-image: url(images/flower.png) 20% round;
+        border-radius: 10px;
+      }
+
+      .right-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        justify-content: flex-start;
+      }
+
+        /* Scrollable history list */
+      .history-list {
+        width: 70%;
+        height: 140px;
+        overflow-y: auto;
+        background-color: rgba(0, 0, 0, 0.401);
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        border: 5px groove #D4A3C4;
+        scrollbar-width: thin;
+        border: 10px solid transparent;
+        border-image: url(images/flower2.png) 40% round;
+        border-radius: 10px;
+        list-style: none; /* Removes default bullets */
+      }
 
     </style>
 
 
   </head>
 
-
-
   <body>
-    <div><h1 id="heading">◦◉✿ Welcome to the Dice Roller! ✿◉◦</h1>
-      <div id="textbox">Choose a dice from d4, d6 and d20 and may the odds ever be in your favour! </div>
+    <div id="intro"><h1 id="heading">◦◉✿ Welcome to the Dice Roller! ✿◉◦</h1>
+      <div id="textbox">~𖥔☾ Choose a dice from d4, d6 and d20 and may the odds ever be in your favour! ☽𖥔~</div>
     </div>
 
-    <br><br><br>
+    <div class="app-container">
+      <div class="left-side">
+        <div class="button-container">
+          <button type="button" class="roll-d4">
+            ╔════▣◎▣════╗ <br> Roll D4 <br> ╚════▣◎▣════╝
+          </button>
 
-    <!-- app-wrapper -->
-    <div class="button-container">
-      <button type="button" class="roll-d4">
-        ╔════▣◎▣════╗ <br> Roll D4 <br> ╚════▣◎▣════╝
-      </button>
+        <button type="button" class="roll-d6">
+          ╔════▣◎▣════╗ <br> Roll D6 <br> ╚════▣◎▣════╝
+        </button>
 
-    <button type="button" class="roll-d6">
-      ╔════▣◎▣════╗ <br> Roll D6 <br> ╚════▣◎▣════╝
-    </button>
+        <button type="button" class="roll-d8">
+          ╔════▣◎▣════╗ <br> Roll D8 <br> ╚════▣◎▣════╝
+        </button>
 
-    <button type="button" class="roll-20">
-      ╔════▣◎▣════╗ <br> Roll D20 <br> ╚════▣◎▣════╝
-    </button>
+        <button type="button" class="roll-d10">
+          ╔════▣◎▣════╗ <br> Roll D10 <br> ╚════▣◎▣════╝
+        </button>
 
-    <div class="dice-container">&#9860;</div>
-    <p class="history-list"> </p>
+        <button type="button" class="roll-d12">
+          ╔════▣◎▣════╗ <br> Roll D12 <br> ╚════▣◎▣════╝
+        </button>
 
-    </div>
+        <button type="button" class="roll-d20">
+          ╔════▣◎▣════╗ <br> Roll D20 <br> ╚════▣◎▣════╝
+        </button>
+        </div>
+      </div>
 
-    <div class="footer">
-      <p id="info"></p>
+      <div class="right-side">
+        <button type="button" class="refresh" onclick="showSweetAlert()">╔. ■ .═══════╗ <br> ↻ Refresh <br> ╚═══════. ■ .╝ </button>
+        <p class="dice-display"></p>
+        <p class="history-list"> </p>
+      </div>
+
+      <div class="footer">
+        <p id="info"></p>
+      </div>
     </div>
 
 
   </body>
+
   <script src="./renderer.js"></script>
 </html>
