@@ -10,6 +10,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 736,
     height: 977,
+    icon: path.join(__dirname, "images", "cherry.ico"),
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

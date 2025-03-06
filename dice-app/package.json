@@ -1,5 +1,5 @@
 {
-  "name": "dice-app",
+  "name": "cherry-crits-and-giggles--for-when-you-roll-a-natural-20...or-a-1",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -9,8 +9,9 @@
   "keywords": [],
   "author": "Yolia Simon",
   "license": "MIT",
-  "description": "work in progress: diceproject",
+  "description": "This is a dice app that I created from scratch that allows you to roll various different dice. This app can be used to play TTRPGs or any other games that involve rolling dice when you don't have access to physical dice.",
   "devDependencies": {
-    "electron": "^34.1.1"
+    "electron": "^34.1.1",
+    "electron-builder": "^25.1.8"
   }
 }
